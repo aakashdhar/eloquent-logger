@@ -38,11 +38,6 @@ class EloquentEventServiceProvider extends ServiceProvider
             $this->logModelCreations($class);
             $this->logModelDeletions($class);
         }
-        
-        // Listen for the Exception event
-        Event::listen(Exception::class, function (Exception $e) {
-            $this->logApplicationError($e);
-        });
     }
 
     /**
@@ -128,7 +123,7 @@ class EloquentEventServiceProvider extends ServiceProvider
         });
     }
 
-   /**
+    /**
      * Get a logger instance.
      *
      * @param string $modelName The name of the model.
@@ -188,36 +183,6 @@ class EloquentEventServiceProvider extends ServiceProvider
         $modelName = class_basename(get_class($modelInstance));
         $logger = $this->getLogger($modelName, Logger::ERROR);
         $logger->error('Error: ' . $e->getMessage(), ['exception' => $e]);
-    }
-    
-    /**
-     * Log application errors.
-     *
-     * @param Exception $e The exception that occurred.
-     *
-     * @return void
-     */
-    public function logApplicationError(Exception $e)
-    {
-        $logger = $this->getNonEloquentLogger(Logger::ERROR);
-        $logger->error('Error: ' . $e->getMessage(), ['exception' => $e]);
-    }
-
-    /**
-     * Get a logger instance for non-eloquent logs.
-     *
-     * @param int $level The log level (default: Logger::INFO).
-     * @return Logger The initialized logger instance.
-     */
-    private function getNonEloquentLogger($level = Logger::INFO)
-    {
-        $now = new \DateTime();
-        $logger = new Logger('NonEloquentLogger');
-        $formatter = new LineFormatter(null, null, false, true);
-        $stream = new StreamHandler(storage_path('logs/' . $now->format('Y-m-d') . '/non_eloquent.log'), $level);
-        $stream->setFormatter($formatter);
-        $logger->pushHandler(new FingersCrossedHandler($stream, new ErrorLevelActivationStrategy($level)));
-        return $logger;
     }
 
 }
