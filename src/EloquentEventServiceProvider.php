@@ -184,5 +184,11 @@ class EloquentEventServiceProvider extends ServiceProvider
         $logger = $this->getLogger($modelName, Logger::ERROR);
         $logger->error('Error: ' . $e->getMessage(), ['exception' => $e]);
     }
+    
+    public function logApplicationError(\Exception $e)
+    {
+	$logger = $this->getLogger(get_class($e), Logger::ERROR);
+	$logger->error('Error: ' . $e->getMessage(), ['exception' => $e]);
+    }
 
 }
