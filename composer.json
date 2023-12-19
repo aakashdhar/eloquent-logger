@@ -7,11 +7,13 @@
         "illuminate/support": "^8.0",
         "monolog/monolog": "^2.0"
     },
-        "autoload": {
-        "psr-4": {
-            "YourName\\MyEloquentLogger\\": "src/"
-        }
-    },
+"extra": {
+    "laravel": {
+        "providers": [
+            "WcgPackage\\EloquentEventLogger\\EloquentEventServiceProvider"
+        ]
+    }
+},
     "license": "MIT",
     "minimum-stability": "dev"
 }
