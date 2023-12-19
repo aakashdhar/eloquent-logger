@@ -1,19 +1,24 @@
 {
     "name": "wcg-package/eloquent-event-logger",
-    "description": "\"Eloquent Event Logger is a logging tool for Laravel's Eloquent ORM. It's designed to automatically record and log events for Laravel Eloquent model's operations such as creation, updates and deletions. Detailed event logs help facilitate debugging and keep track of changes made to models over time. It's a tool for monitoring your application's data layer, ensuring data integrity, and aiding in development.\"",
+    "description": "Eloquent Event Logger is a logging tool for Laravel's Eloquent ORM. It's designed to automatically record and log events for Laravel Eloquent model's operations such as creation, updates and deletions. Detailed event logs help facilitate debugging and keep track of changes made to models over time. It's a tool for monitoring your application's data layer, ensuring data integrity, and aiding in development.",
     "type": "library",
     "require": {
         "php": "^7.3",
         "illuminate/support": "^8.0",
         "monolog/monolog": "^2.0"
     },
-"extra": {
-    "laravel": {
-        "providers": [
-            "WcgPackage\\EloquentEventLogger\\EloquentEventServiceProvider"
-        ]
-    }
-},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WcgPackage\\EloquentEventLogger\\EloquentEventServiceProvider"
+            ]
+        }
+    },
     "license": "MIT",
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "WcgPackage\\EloquentEventLogger\\": "src/"
+        }
+    }
 }

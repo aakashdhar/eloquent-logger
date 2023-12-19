@@ -1,5 +1,5 @@
 <?php
-namespace App\Providers;
+namespace WcgPackage\EloquentEventLogger;
 
 use Illuminate\Support\ServiceProvider;
 use Monolog\Formatter\LineFormatter;
