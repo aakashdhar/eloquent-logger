@@ -7,6 +7,8 @@ use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
 use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use WcgPackage\EloquentEventLogger\Middleware\HandleNonEloquentExceptions;
+
 class EloquentEventServiceProvider extends ServiceProvider
 {
     private $lastLoggedEvent = '';
@@ -32,6 +34,9 @@ class EloquentEventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $router = $this->app->make('router');
+        $router->aliasMiddleware('handleNonEloquentExceptions', HandleNonEloquentExceptions::class);
+
         foreach (glob(app_path('Models') . '/*.php') as $model) {
             $class = "App\\Models\\" . basename(str_replace('.php', '', $model));
             $this->logModelUpdates($class);
