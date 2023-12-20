@@ -124,11 +124,11 @@ class EloquentEventServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get a logger instance.
+     * Gets an instance of the logger with the specified log level.
      *
      * @param string $modelName The name of the model.
-     * @param int $level The log level (default: Logger::INFO).
-     * @return Logger The initialized logger instance.
+     * @param int $level The log level (optional). Defaults to Logger::INFO.
+     * @return Logger The logger instance.
      */
     private function getLogger($modelName, $level = Logger::INFO)
     {
