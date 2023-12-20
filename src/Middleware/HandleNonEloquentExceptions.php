@@ -3,14 +3,13 @@ namespace WcgPackage\EloquentEventLogger\Middleware;
 
 use Closure;
 use Throwable;
-use Illuminate\Http\Middleware\Middleware;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\FingersCrossedHandler;
 use Monolog\Handler\FingersCrossed\ErrorLevelActivationStrategy;
 use Monolog\Formatter\LineFormatter;
 
-class HandleNonEloquentExceptions extends Middleware
+class HandleNonEloquentExceptions
 {
     public function handle($request, Closure $next)
     {
